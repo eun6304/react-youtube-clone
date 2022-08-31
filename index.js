@@ -5,13 +5,16 @@ const express = require('express')
 const app = express()
 
 // 포트 번호를 지정해주고
-const port = 3000
+const port = 5000
 
 // models/User.js의 user모델 가져오기
 const { User } = require("./models/User")
 
 // body-parser 가져오기
 const bodyParser = require('body-parser');
+
+// config 디렉토리에서 환경 변수 가져오기
+const config = require("./config/key");
 
 // body-parser 옵션 주기
 // 서버에서 정보를 분석해서 가져올 수 있게 해주는게 body parser 인데
@@ -24,7 +27,7 @@ app.use(bodyParser.json())
 
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://eun6304:dmstj112@boilerplate.i665x.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(config.mongoURI, {
   useNewUrlParser : true, useUnifiedTopology: true
 }).then(() => console.log("MongoDB Connected..."))
 .catch(err => console.log(err))
