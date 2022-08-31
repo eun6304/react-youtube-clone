@@ -48,6 +48,7 @@ app.post('/register', (req, res) => {
 
   const user = new User(req.body)
   // user 모델에 저장하고 오류 처리 및 status 200 성공 처리
+  // save 하기 전에 비밀 번호 암호화 해줘야함
   user.save((err, userInfo) => {
     if(err) return res.json({ success : false, err })
     return res.status(200).json({ success : true })
