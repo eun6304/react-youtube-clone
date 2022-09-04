@@ -9,7 +9,17 @@ npm install body-parser --save
 npm install nodemon --save-dev
 
 npm install bcrypt --save
+npm install jsonwebtoken --save
+npm install cookie-parser --save
+npm install concurrently --save
 
+// client
+npx create-react-app .
+npm install react-router-dom --save
+npm install axios --save
+npm install http-proxy-middleware --save
+npm install antd --save
+npm install redux react-redux redux-promise redux-thunk --save
 
 // package.json -> scripts
 "start" : "node index.js"
