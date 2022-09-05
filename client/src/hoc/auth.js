@@ -12,7 +12,6 @@ export default function(SpecificComponent, option, adminRoute = null) {
     useEffect(() => {
       dispatch(authUser())
       .then(response => {
-        console.log(response)
         //  로그인 안한 상태
         if(!response.payload.isAuth) {
             navigate('/login')
