@@ -1,3 +1,5 @@
+login 계정은 es@naver.com / 123456789
+
 npm install express --save
 npm install mongoose --save
 
