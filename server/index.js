@@ -34,6 +34,9 @@ app.use(bodyParser.json())
 // cookieParser 사용하기
 app.use(cookieParser())
 
+app.use('/api/video', require('./routes/video'));
+
+app.use('/uploads', express.static('uploads'));
 
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoURI, {

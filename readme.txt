@@ -14,6 +14,7 @@ npm install bcrypt --save
 npm install jsonwebtoken --save
 npm install cookie-parser --save
 npm install concurrently --save
+npm install multer --save 
 
 // client
 npx create-react-app .
@@ -22,6 +23,8 @@ npm install axios --save
 npm install http-proxy-middleware --save
 npm install antd --save
 npm install redux react-redux redux-promise redux-thunk --save
+npm install react-dropzone --save
+npm install @ant-design/icons --save
 
 // package.json -> scripts
 "start" : "node index.js"
