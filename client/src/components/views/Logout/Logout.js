@@ -10,18 +10,7 @@ function LandingPage() {
       console.log(res.data)
     })
   }, [])
-  const navigate = useNavigate();
 
-  const onClickHandler = () => {
-    axios.get('/api/users/logout')
-    .then(response => {
-      if(response.data.success) {
-        navigate('/login')
-      }else {
-        alert("로그아웃 실패했습니다.")
-      }
-    })
-  }
   return (
     <div style={{ width : '85%', margin : '3rem auto'}}>
       <Title level={2}> Recommended </Title>

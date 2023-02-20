@@ -35,6 +35,10 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 app.use('/api/video', require('./routes/video'));
+app.use('/api/subscribe', require('./routes/subscribe'));
+app.use('/api/comments', require('./routes/comments'));
+app.use('/api/like', require('./routes/like'));
+
 
 app.use('/uploads', express.static('uploads'));
 
@@ -95,9 +99,10 @@ app.post('/api/users/login', (req, res) => {
 
         // 토큰을 저장한다. 어디에?  쿠키...로컬스토리지..
         // 어디에 저장해야 가장 안전한지는 아직도 논란이 많다.
-        res.cookie("x_auth", user.token)
+
+        res.cookie("x_auth", user.token, { maxAge: 7.2e+6 })
         .status(200)
-        .json({ loginSuccess : true, message : "로그인 되었습니다."})
+        .json({ loginSuccess : true, message : "로그인 되었습니다.", userId : user._id})
 
       })
     })
@@ -127,6 +132,7 @@ app.get('/api/users/logout', auth, (req, res) => {
     { token : ""},
     (err, user) => {
       if(err) return res.json({ success : false, err })
+      res.clearCookie("x_auth")
       return res.status(200).send({
         success : true
       })

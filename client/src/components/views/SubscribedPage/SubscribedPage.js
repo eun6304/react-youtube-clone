@@ -6,21 +6,22 @@ import moment from 'moment';
 const { Title } = Typography;
 const { Meta } = Card;
 
-function LandingPage() {
-  const [Videos, setVideos] = useState([])
+function SubscribedPage() {
+  const [SubscribedVideos, setSubscribedVideos] = useState([])
 
   useEffect(() => {
-     axios.get('/api/video/getVideos')
+    let variable = { userFrom : localStorage.getItem('userId') }
+     axios.post('/api/subscribe/getSubscribedVideos', variable)
      .then(response => {
       if(response.data.success) {
-        setVideos(response.data.videos)
+        setSubscribedVideos(response.data.videos)
       }else {
         alert('비디오 가져오기를 실패 했습니다.')
       }
      })
   }, []) // [] 가 없으면 계속 실행, [] 있으면 한번만 실행
   
-  const renderCards = Videos.map((video, index) => {
+  const renderCards = SubscribedVideos.map((video, index) => {
     var minutes = Math.floor(video.duration / 60);
     var seconds = String(Math.floor(video.duration - minutes * 60)).padStart(2, '0')
 
@@ -50,7 +51,7 @@ function LandingPage() {
   return (
     <div>
       <div style={{ width : '85%', margin : '3rem auto'}}>
-        <Title level={2}> Home </Title>
+        <Title level={2}> Subscribed </Title>
         <hr />
         <Row gutter={[32, 16]}>
           {renderCards}
@@ -61,4 +62,4 @@ function LandingPage() {
   )
 }
 
-export default LandingPage
+export default SubscribedPage

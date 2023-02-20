@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action'
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 function LoginPage() {
   // State 만들기 
@@ -12,6 +13,9 @@ function LoginPage() {
   // 타이핑 -> OnChange -> on어쩌고Handelr -> set어쩌고 -> useState -> Value
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
+
+  // 쿠키 이용하기
+  const [cookies, setCookie] = useCookies(['id']);
 
   // dispatch 사용하기
   const dispatch = useDispatch();
@@ -39,6 +43,8 @@ function LoginPage() {
       if(response.payload.loginSuccess) {
         // root 경로로 이동
         navigate('/')
+        console.log(response.payload)
+        window.localStorage.setItem('userId', response.payload.userId);
       } else {
         alert('로그인에 실패하였습니다.')
       }

@@ -25,6 +25,9 @@ npm install antd --save
 npm install redux react-redux redux-promise redux-thunk --save
 npm install react-dropzone --save
 npm install @ant-design/icons --save
+npm install react-cookie --save
+npm i react-player --save
+npm install @ant-design/icons --save-dev
 
 // package.json -> scripts
 "start" : "node index.js"

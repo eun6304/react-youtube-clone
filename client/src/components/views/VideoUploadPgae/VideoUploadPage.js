@@ -51,7 +51,8 @@ function VideoUploadPage() {
   }
 
   const onDrop = files => {
-    let formData = new FormData;
+    let formData = new FormData
+    // 파일 보낼땐 헤더를 설정 안해주면 오류가 생김
     const config = {
       header : {'content-type' : 'multipart/form-data'}
     }
@@ -102,8 +103,10 @@ function VideoUploadPage() {
     axios.post('/api/video/uploadVideo', variables)
     .then(response => {
       if(response.data.success) {
-        message.success("성공적으로 업로드를 했습니다.")
-        navigate('/')
+        setTimeout(() => {
+          message.success("성공적으로 업로드를 했습니다.")
+          navigate('/')
+        }, 3000)
       } else {
         alert("비디오 업로드에 실패했습니다.")
       }
