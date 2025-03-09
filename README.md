@@ -24,16 +24,17 @@ cd react-youtube-clone
 
 ### 2. 프론트엔드 설정 및 실행
 ```sh
-cd client
-npm install
-npm start
+npm run start
 ```
 
 ### 3. 백엔드 설정 및 실행
 ```sh
-cd server
-npm install
-npm start
+npm run backend
+```
+
+### 4. concurrently로 프론트 및 백 동시 실행
+```sh
+npm run dev
 ```
 
 ## 개발자 참고 사항
