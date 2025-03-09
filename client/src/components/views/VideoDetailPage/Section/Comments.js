@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import SingleComment from './SingleComment'
 import ReplyComment from './ReplyComment'
+import { Comment, Avatar, Button, Input, Form } from 'antd'
+
+const { TextArea } = Input;
 
 function Comments(props) {
   const videoId = useParams().videoId
@@ -14,8 +17,8 @@ function Comments(props) {
     setCommentsValue(event.currentTarget.value)
   }
 
-  const onSubmit = event => {
-    event.preventDefault();
+  const onSubmit = values => {
+    // event.preventDefault();
 
     const variables = {
       content : CommentsValue,
@@ -52,16 +55,24 @@ function Comments(props) {
 
       
       {/* Root Comments Form */}
-      <form style={{ display : 'flex' }} onSubmit={onSubmit} >
-        <textarea
-          style={{ width : '100%', borderRadius : '5px' }}
-          onChange={handleClick}
-          value={CommentsValue}
-          placeholder='코멘트를 작성해 주세요'
-        />
-        <br />
-        <button style={{ width : '20%', height : '52px'}} onClick={onSubmit}>Submit</button>
-      </form>
+      <Form 
+        layout="vertical" 
+        onFinish={onSubmit} 
+        style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
+      >
+        <Form.Item style={{ flex: 1, marginBottom: 0 }}>
+          <TextArea
+            rows={2}
+            onChange={handleClick}
+            value={CommentsValue}
+            placeholder="코멘트를 작성해 주세요"
+          />
+        </Form.Item>
+
+        <Button type="primary" htmlType="submit" style={{ height: '52px' }}>
+          Submit
+        </Button>
+      </Form>
 
     </div>
   )

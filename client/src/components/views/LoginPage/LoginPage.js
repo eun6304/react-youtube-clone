@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action'
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { Form, Input, Button } from 'antd';
 
 function LoginPage() {
   // State 만들기 
@@ -31,14 +32,16 @@ function LoginPage() {
     setPassword(event.currentTarget.value)
   }
 
-  const onSubmitHandler= event => {
-    event.preventDefault();
-    let body = {
-      email : Email,
-      password : Password
-    }
+  const onSubmitHandler= values => {
+    // event.preventDefault();
+    // let body = {
+    //   email : Email,
+    //   password : Password
+    // }
+    const { email, password } = values;
+
     // loginUser 라는 액션을 실행시킴
-    dispatch(loginUser(body))
+    dispatch(loginUser({ email, password }))
     .then(response => {
       if(response.payload.loginSuccess) {
         // root 경로로 이동
@@ -58,18 +61,32 @@ function LoginPage() {
       display: 'flex', justifyContent: 'center', alignItems: 'center',
       width: '100%', height: '100vh'
     }}>
-      <form style={{ display:'flex', flexDirection : 'column'}}
-        onSubmit={onSubmitHandler}
+      <Form 
+        onFinish={onSubmitHandler}  // Ant Design에서는 onSubmit 대신 onFinish 사용
+        style={{ width: '300px', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)' }}
+        layout="vertical"
       >
-        <label>Email</label>
-        <input type="email" value={Email} onChange={onEmailHandler} />
-        <label>Password</label>
-        <input type="password" value={Password} onChange={onPasswordHandler} />
+        <Form.Item 
+          label="Email" 
+          name="email" 
+          rules={[{ required: true, message: 'Please enter your email!' }]}
+        >
+          <Input type="email" value={Email} onChange={onEmailHandler} />
+        </Form.Item>
+        <Form.Item 
+          label="Password" 
+          name="password" 
+          rules={[{ required: true, message: 'Please enter your password!' }]}
+        >
+          <Input.Password value={Password} onChange={onPasswordHandler} />
+        </Form.Item>
         <br />
-        <button type="submit">
+        <Form.Item>
+          <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
             Login
-        </button>
-      </form>
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   )
 }

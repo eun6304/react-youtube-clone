@@ -30,7 +30,7 @@ function RightMenu(props) {
   const user = useSelector(state => state.user)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  console.log(user)
   const onLogoutHandler = event => {
 
     // logoutUser 라는 액션을 실행시킴
@@ -45,15 +45,16 @@ function RightMenu(props) {
     
   }
 
-  if(user.serverUserData && !user.serverUserData.isAuth) {
-    return (
-      <Menu mode={props.mode} items={MenuItems}></Menu>
-    )
-  } else {
-    return (
-      <Menu mode={props.mode} onClick={onLogoutHandler} items={AuthMenuItems}></Menu>
-    )
-  }
+  return (
+    <Menu
+      mode={props.mode} // 👉 부모 컴포넌트에서 전달된 mode 사용
+      theme="dark"
+      className="menu-style"
+      onClick={user.serverUserData && user.serverUserData.isAuth ? onLogoutHandler : undefined}
+      items={user.serverUserData && user.serverUserData.isAuth ? AuthMenuItems : MenuItems}
+      style={{ flexGrow: 1, justifyContent: 'end' }} // 균등 정렬
+    />
+  );
 
 
 }

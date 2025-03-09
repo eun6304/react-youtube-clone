@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Button, Form, message, Input } from 'antd';
+import { Typography, Button, Form, message, Input, Select } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import DropZone from 'react-dropzone';
 import  axios from 'axios';
@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const { TextArea } = Input;
 const { Title } = Typography;
+
+const { Option } = Select;
 
 const PrivateOptions = [
   { value : 0, label : "Private"},
@@ -106,7 +108,7 @@ function VideoUploadPage() {
         setTimeout(() => {
           message.success("성공적으로 업로드를 했습니다.")
           navigate('/')
-        }, 3000)
+        }, 3001)
       } else {
         alert("비디오 업로드에 실패했습니다.")
       }
@@ -160,18 +162,24 @@ function VideoUploadPage() {
         />
         <br />
         <br />
-        <select onChange={onPrivateChange}>
+        <Select 
+          onChange={onPrivateChange} 
+          defaultValue={PrivateOptions[0].value}
+          style={{ width: '100%', marginBottom: '16px' }}
+          >
           {PrivateOptions.map((item, index) => (
-            <option key={index} value={item.value}>{ item.label }</option>
+            <Option  key={index} value={item.value}>{ item.label }</Option>
           ))}
-        </select>
-        <br />
-        <br />
-        <select onChange={onCategoryChange}>
+        </Select>
+        <Select 
+          defaultValue={CategoryOptions[0].value}
+          onChange={onCategoryChange}
+          style={{ width: '100%' }}
+        >
         {CategoryOptions.map((item, index) => (
-            <option key={index} value={item.value}>{ item.label }</option>
+            <Option  key={index} value={item.value}>{ item.label }</Option>
           ))}
-        </select>
+        </Select>
         <br />
         <br />
         <Button type="primary" size="large" onClick={onSubmit}>

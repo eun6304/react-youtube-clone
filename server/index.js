@@ -131,6 +131,7 @@ app.get('/api/users/logout', auth, (req, res) => {
   User.findOneAndUpdate({ _id: req.user._id }, 
     { token : ""},
     (err, user) => {
+      console.log("logout", user)
       if(err) return res.json({ success : false, err })
       res.clearCookie("x_auth")
       return res.status(200).send({

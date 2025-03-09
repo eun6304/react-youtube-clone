@@ -23,7 +23,12 @@ const MenuItems =  [
 
 function LeftMenu(props) {
   return (
-    <Menu mode={props.mode} items={MenuItems} style={{ display : 'flex'}}></Menu>
+    <Menu 
+      mode={props.mode}
+      theme="dark"
+      className="menu-style"
+      items={MenuItems}
+    />
   )
 }
 
